@@ -163,7 +163,7 @@ public final class View
 	{
 		display.setBackground(Color.black);
 		display.setForeground(Color.white);
-        display.setText("Welcome to the School Directory Database\n\n"
+                display.setText("Welcome to the School Directory Database\n\n"
                          +"Please use the application's menu");
 		display.setEditable(false);
 		displayScrollPane = new JScrollPane(display);
