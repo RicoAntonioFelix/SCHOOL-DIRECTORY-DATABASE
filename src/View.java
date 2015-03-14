@@ -228,8 +228,8 @@ public final class View
 	{
 		configureFileMenuActionListeners();
 		configureEditMenuActionListeners();
-        configureFindMenuActionListeners();
-        configureHelpMenuActionListeners();
+                configureFindMenuActionListeners();
+                configureHelpMenuActionListeners();
 	}
 
 	private static void configureFileMenuActionListeners()
