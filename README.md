@@ -1,4 +1,4 @@
-School_Directory_Database
+SCHOOL-DIRECTORY-DATABASE
 =========================
 
 Database Application for Storing School Member Information
