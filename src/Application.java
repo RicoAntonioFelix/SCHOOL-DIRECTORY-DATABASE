@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Rico Antonio Felix
+ * Copyright (C) 2014-2015 Rico Antonio Felix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.rico.felix.app;
-/*
- * Platform Dependencies
+/**
+ * @author Rico Antonio Felix <ricoantoniofelix@yahoo.com>
  */
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.UnsupportedLookAndFeelException;
+
+/*
+ * Local Dependency
+ */
+package com.rico.felix.app;
 
 /*
  * Local Dependencies
@@ -34,35 +34,13 @@ import com.rico.felix.view.View;
  */
 final class Application
 {
-	/**
-	 * This method launches the application, configures its look and feel,
-	 * loads application data and present a view of the data to the user.
-	 */
-	public static void main(String[] args)
-	{
-		SwingUtilities.invokeLater(() -> {
-			try
-			{
-				for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
-				{
-					if (info.getName().equals("Nimbus"))
-					{
-						UIManager.setLookAndFeel(info.getClassName());
-						break;
-					}
-				}
-			}
-			catch (UnsupportedLookAndFeelException ulafe)
-			{
-				System.err.println("Error while configuring look and feel");
-			}
-			catch (Exception e)
-			{
-				System.err.println("Internal Error: ");
-				e.printStackTrace();
-			}
-			Directory.loadDirectory();
-			View.loadView();
-		});
-	}
+    /**
+     * This method launches the application, loads application data
+     * and presents a view of the data to the user.
+     */
+    public static void main(String[] args)
+    {
+        Directory.loadDirectory();
+        View.loadView();
+    }
 }
