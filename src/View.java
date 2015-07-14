@@ -38,6 +38,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 /*
  * Local Dependencies
@@ -65,196 +68,196 @@ import com.rico.felix.auxiliary.MemberTypes;
  */
 public final class View
 {
-	// Application's interface view-port window frame and menu-bar
-	private static JFrame frame;
-	private static JMenuBar menuBar;
+    // Application's interface view-port window frame and menu-bar
+    private static JFrame frame;
+    private static JMenuBar menuBar;
 
-	// File menu components
-	private static JMenu fileMenu;
-	private static JMenuItem save;
-	private static JMenuItem exit;
+    // File menu components
+    private static JMenu fileMenu;
+    private static JMenuItem save;
+    private static JMenuItem exit;
 
-	// Edit menu components
-	private static JMenu editMenu;
-	private static JMenuItem  addStudent;
-	private static JMenuItem  addStaffMember;
-	private static JMenuItem  addFacultyMember;
-	private static JSeparator seperator1;
-	private static JMenuItem  removeMember;
-	private static JSeparator seperator2;
-	private static JMenuItem  clearDisplay;
+    // Edit menu components
+    private static JMenu editMenu;
+    private static JMenuItem  addStudent;
+    private static JMenuItem  addStaffMember;
+    private static JMenuItem  addFacultyMember;
+    private static JSeparator seperator1;
+    private static JMenuItem  removeMember;
+    private static JSeparator seperator2;
+    private static JMenuItem  clearDisplay;
 
-	// Find menu components
-	private static JMenu findMenu;
-	private static JMenuItem showAll;
-	private static JMenuItem findMember;
-	private static JMenuItem findStudents;
-	private static JMenuItem findStaffMembers;
-	private static JMenuItem findFacultyMembers;
+    // Find menu components
+    private static JMenu findMenu;
+    private static JMenuItem showAll;
+    private static JMenuItem findMember;
+    private static JMenuItem findStudents;
+    private static JMenuItem findStaffMembers;
+    private static JMenuItem findFacultyMembers;
 
-	// Help menu components
-	private static JMenu helpMenu;
-	private static JMenuItem manual;
-	private static JMenuItem about;
+    // Help menu components
+    private static JMenu helpMenu;
+    private static JMenuItem manual;
+    private static JMenuItem about;
 
-	// Application interface's view-port and scrollbar
-	private static JTextArea display;
-	private static JScrollPane displayScrollPane;
+    // Application interface's view-port and scrollbar
+    private static JTextArea display;
+    private static JScrollPane displayScrollPane;
 
-	/*
-	 * Prevent instantiation using conventional construction semantics
-	 */
-	private View()
-	{}
+    /*
+     * Prevent instantiation from using conventional construction semantics
+     */
+    private View()
+    {}
 
-	/*
-	 * Statically configure interface's layout and bind action listeners
-	 * to interface components
-	 */
-	static
-	{
-		initializeInterfaceComponents();
-		configureViewPort();
-		configureMenuBar();
-		configureFrame();
-	}
+    /*
+     * Statically configure interface's layout and bind action listeners
+     * to interface components
+     */
+    static
+    {
+        initializeInterfaceComponents();
+        configureViewPort();
+        configureMenuBar();
+        configureFrame();
+    }
 
-	private static void initializeInterfaceComponents()
-	{
-		// Interface window frame
-		frame = new JFrame("School Directory Database");
+    private static void initializeInterfaceComponents()
+    {
+        // Interface window frame
+        frame = new JFrame("School Directory Database");
 
-		// Interface menu bar
-		menuBar = new JMenuBar();
+        // Interface menu bar
+        menuBar = new JMenuBar();
 
-		// File menu components
-		fileMenu = new JMenu("File");
-		save     = new JMenuItem("Save");
-		exit     = new JMenuItem("Exit");
+        // File menu components
+        fileMenu = new JMenu("File");
+        save     = new JMenuItem("Save");
+        exit     = new JMenuItem("Exit");
 
-		// Edit menu components
-		editMenu         = new JMenu("Edit");
-		addStudent       = new JMenuItem("Add Student");
-		addStaffMember   = new JMenuItem("Add Staff Member");
-		addFacultyMember = new JMenuItem("Add Faculty Member");
-		seperator1       = new JSeparator();
-		removeMember     = new JMenuItem("Remove Member");
-		seperator2       = new JSeparator();
-		clearDisplay     = new JMenuItem("Clear Display");
+        // Edit menu components
+        editMenu         = new JMenu("Edit");
+        addStudent       = new JMenuItem("Add Student");
+        addStaffMember   = new JMenuItem("Add Staff Member");
+        addFacultyMember = new JMenuItem("Add Faculty Member");
+        seperator1       = new JSeparator();
+        removeMember     = new JMenuItem("Remove Member");
+        seperator2       = new JSeparator();
+        clearDisplay     = new JMenuItem("Clear Display");
 
-		// Find menu components
-		findMenu           = new JMenu("Find");
-		showAll            = new JMenuItem("Show All");
-		findMember         = new JMenuItem("Find Member");
-		findStudents       = new JMenuItem("Find Students");
-		findStaffMembers   = new JMenuItem("Find Staff Members");
-		findFacultyMembers = new JMenuItem("Find Faculty Members");
+        // Find menu components
+        findMenu           = new JMenu("Find");
+        showAll            = new JMenuItem("Show All");
+        findMember         = new JMenuItem("Find Member");
+        findStudents       = new JMenuItem("Find Students");
+        findStaffMembers   = new JMenuItem("Find Staff Members");
+        findFacultyMembers = new JMenuItem("Find Faculty Members");
 
-		// Help menu components
-		helpMenu = new JMenu("Help");
-		manual   = new JMenuItem("Manual");
-		about    = new JMenuItem("About");
+        // Help menu components
+        helpMenu = new JMenu("Help");
+        manual   = new JMenuItem("Manual");
+        about    = new JMenuItem("About");
 
-		// View-port
-		display = new JTextArea();
-	}
+        // View-port
+        display = new JTextArea();
+    }
 
-	private static void configureViewPort()
-	{
-		display.setBackground(Color.black);
-		display.setForeground(Color.white);
-                display.setText("Welcome to the School Directory Database\n\n"
+    private static void configureViewPort()
+    {
+        display.setBackground(Color.black);
+        display.setForeground(Color.white);
+        display.setText("Welcome to the School Directory Database\n\n"
                          +"Please use the application's menu");
-		display.setEditable(false);
-		displayScrollPane = new JScrollPane(display);
-	}
+        display.setEditable(false);
+        displayScrollPane = new JScrollPane(display);
+    }
 
-	private static void configureMenuBar()
-	{
-		configureMenuBarLayout();
-		assembleMenuBar();
-		configureMenuBarActionListeners();
-	}
+    private static void configureMenuBar()
+    {
+        configureMenuBarLayout();
+        assembleMenuBar();
+        configureMenuBarActionListeners();
+    }
 
-	private static void configureMenuBarLayout()
-	{
-		configureFileMenuLayout();
-		configureEditMenuLayout();
-		configureFindMenuLayout();
-		configureHelpMenuLayout();
-	}
+    private static void configureMenuBarLayout()
+    {
+        configureFileMenuLayout();
+        configureEditMenuLayout();
+        configureFindMenuLayout();
+        configureHelpMenuLayout();
+    }
 
-	private static void configureFileMenuLayout()
-	{
-		fileMenu.add(save);
-		fileMenu.add(exit);
-	}
+    private static void configureFileMenuLayout()
+    {
+        fileMenu.add(save);
+        fileMenu.add(exit);
+    }
 
-	private static void configureEditMenuLayout()
-	{
-		editMenu.add(addStudent);
-		editMenu.add(addStaffMember);
-		editMenu.add(addFacultyMember);
-		editMenu.add(seperator1);
-		editMenu.add(removeMember);
-		editMenu.add(seperator2);
-		editMenu.add(clearDisplay);
-	}
+    private static void configureEditMenuLayout()
+    {
+        editMenu.add(addStudent);
+        editMenu.add(addStaffMember);
+        editMenu.add(addFacultyMember);
+        editMenu.add(seperator1);
+        editMenu.add(removeMember);
+        editMenu.add(seperator2);
+        editMenu.add(clearDisplay);
+    }
 
-	private static void configureFindMenuLayout()
-	{
-		findMenu.add(showAll);
-		findMenu.add(findMember);
-		findMenu.add(findStudents);
-		findMenu.add(findStaffMembers);
-		findMenu.add(findFacultyMembers);
-	}
+    private static void configureFindMenuLayout()
+    {
+        findMenu.add(showAll);
+        findMenu.add(findMember);
+        findMenu.add(findStudents);
+        findMenu.add(findStaffMembers);
+        findMenu.add(findFacultyMembers);
+    }
 
-	private static void configureHelpMenuLayout()
-	{
-		helpMenu.add(manual);
-		helpMenu.add(about);
-	}
+    private static void configureHelpMenuLayout()
+    {
+        helpMenu.add(manual);
+        helpMenu.add(about);
+    }
 
-	private static void assembleMenuBar()
-	{
-		menuBar.add(fileMenu);
-		menuBar.add(editMenu);
-		menuBar.add(findMenu);
-		menuBar.add(helpMenu);
-	}
+    private static void assembleMenuBar()
+    {
+        menuBar.add(fileMenu);
+        menuBar.add(editMenu);
+        menuBar.add(findMenu);
+        menuBar.add(helpMenu);
+    }
 
-	private static void configureMenuBarActionListeners()
-	{
-		configureFileMenuActionListeners();
-		configureEditMenuActionListeners();
-                configureFindMenuActionListeners();
-                configureHelpMenuActionListeners();
-	}
+    private static void configureMenuBarActionListeners()
+    {
+        configureFileMenuActionListeners();
+        configureEditMenuActionListeners();
+        configureFindMenuActionListeners();
+        configureHelpMenuActionListeners();
+    }
 
-	private static void configureFileMenuActionListeners()
-	{
-		configureSaveMenuActionListener();
-		configureExitMenuActionListener();
-	}
+    private static void configureFileMenuActionListeners()
+    {
+        configureSaveMenuActionListener();
+        configureExitMenuActionListener();
+    }
 
-	private static void configureSaveMenuActionListener()
-	{
-		save.addActionListener((event) -> {
-			Database.save();
-			display.setEditable(true);
-			display.replaceRange("Changes was saved successfully", 0,
-					                     display.getText().length());
-			display.setEditable(false);
-		});
-	}
+    private static void configureSaveMenuActionListener()
+    {
+        save.addActionListener((event) -> {
+            Database.save();
+            display.setEditable(true);
+            display.replaceRange("Changes was saved successfully", 0,
+                                         display.getText().length());
+            display.setEditable(false);
+        });
+    }
 
-	private static void configureExitMenuActionListener()
-	{
-		exit.addActionListener((event) -> {
-			exitCloseOperation();
-		});
-	}
+    private static void configureExitMenuActionListener()
+    {
+        exit.addActionListener((event) -> {
+            exitCloseOperation();
+        });
+    }
 
     private static void configureEditMenuActionListeners()
     {
@@ -315,31 +318,20 @@ public final class View
     {
         showAll.addActionListener((event) -> {
 
-            Iterator<Person> allMembers =
-                    Directory.getMemberInformation((person) -> {
-                        return person instanceof Person;
-                    });
-
             StringBuilder information = new StringBuilder("");
 
-            if (allMembers != null)
+            Directory.getMemberInformation(person -> person instanceof Person)
+                     .forEachRemaining((Person person) -> {information.append(person);});
+
+            if (information.length() != 0)
             {
-                while (allMembers.hasNext())
-                {
-                    information.append(allMembers.next().toString());
-                }
+                display.setEditable(true);
+                display.replaceRange("Directory Listing:\n\n" + information.toString(), 0,
+                                     display.getText().length());
+                display.setEditable(false);
             }
             else
-            {
                 emptyDirectoryNotification();
-                return;
-            }
-
-            display.setEditable(true);
-            display.replaceRange("Directory Listing:\n\n" + information.toString(), 0,
-                                 display.getText().length());
-            display.setEditable(false);
-
         });
     }
 
@@ -354,30 +346,20 @@ public final class View
     {
         findStudents.addActionListener((event) -> {
 
-            Iterator<Person> students =
-                    Directory.getMemberInformation((person) -> {
-                        return person instanceof Student;
-                    });
-
             StringBuilder information = new StringBuilder("");
 
-            if (students != null)
+            Directory.getMemberInformation(person -> person instanceof Student)
+                     .forEachRemaining((Person student) -> {information.append(student);});
+
+            if (information.length() != 0)
             {
-                while (students.hasNext())
-                {
-                    information.append(students.next().toString());
-                }
+                display.setEditable(true);
+                display.replaceRange("Directory Listing:\n\n" + information.toString(), 0,
+                                     display.getText().length());
+                display.setEditable(false);
             }
             else
-            {
                 emptyDirectoryNotification();
-                return;
-            }
-
-            display.setEditable(true);
-            display.replaceRange("Students Information:\n\n" + information.toString(),
-                                 0, display.getText().length());
-            display.setEditable(false);
 
         });
     }
@@ -386,30 +368,20 @@ public final class View
     {
         findStaffMembers.addActionListener((event) -> {
 
-            Iterator<Person> staffMembers =
-                    Directory.getMemberInformation((person) -> {
-                        return person instanceof Staff;
-                    });
-
             StringBuilder information = new StringBuilder("");
 
-            if (staffMembers != null)
+            Directory.getMemberInformation(person -> person instanceof Staff)
+                     .forEachRemaining((Person staff) -> {information.append(staff);});
+
+            if (information.length() != 0)
             {
-                while (staffMembers.hasNext())
-                {
-                    information.append(staffMembers.next().toString());
-                }
+                display.setEditable(true);
+                display.replaceRange("Directory Listing:\n\n" + information.toString(), 0,
+                                     display.getText().length());
+                display.setEditable(false);
             }
             else
-            {
                 emptyDirectoryNotification();
-                return;
-            }
-
-            display.setEditable(true);
-            display.replaceRange("Staff Members Information:\n\n" + information.toString(),
-                                 0, display.getText().length());
-            display.setEditable(false);
 
         });
     }
@@ -418,30 +390,20 @@ public final class View
     {
         findFacultyMembers.addActionListener((event) -> {
 
-            Iterator<Person> facultyMembers =
-                    Directory.getMemberInformation((person) -> {
-                        return person instanceof Faculty;
-                    });
-
             StringBuilder information = new StringBuilder("");
 
-            if (facultyMembers != null)
+            Directory.getMemberInformation(person -> person instanceof Faculty)
+                     .forEachRemaining((Person faculty) -> {information.append(faculty);});
+
+            if (information.length() != 0)
             {
-                while (facultyMembers.hasNext())
-                {
-                    information.append(facultyMembers.next().toString());
-                }
+                display.setEditable(true);
+                display.replaceRange("Directory Listing:\n\n" + information.toString(), 0,
+                                     display.getText().length());
+                display.setEditable(false);
             }
             else
-            {
                 emptyDirectoryNotification();
-                return;
-            }
-
-            display.setEditable(true);
-            display.replaceRange("Faculty Members Information:\n\n" + information.toString(),
-                                 0, display.getText().length());
-            display.setEditable(false);
 
         });
     }
@@ -469,93 +431,111 @@ public final class View
         });
     }
 
-	private static void emptyDirectoryNotification()
-	{
-		display.setEditable(true);
-		display.replaceRange("Directory is currently empty:\n\n", 0,
-			                 display.getText().length());
-		display.setEditable(false);
-	}
+    private static void emptyDirectoryNotification()
+    {
+        display.setEditable(true);
+        display.replaceRange("Directory is currently empty:\n\n", 0,
+                             display.getText().length());
+        display.setEditable(false);
+    }
 
-	private static void configureFrame()
-	{
-		frame.setLayout(new BorderLayout());
+    private static void configureFrame()
+    {
+        frame.setLayout(new BorderLayout());
 
-		configureFrameWindowActionListener();		
+        configureFrameWindowActionListener();
+        configureLookAndFeel();     
 
-		frame.setSize(600, 400);
-		frame.setJMenuBar(menuBar);
-		frame.getContentPane().add(displayScrollPane);
-		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
+        frame.setSize(600, 400);
+        frame.setJMenuBar(menuBar);
+        frame.getContentPane().add(displayScrollPane);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
 
-	private static void configureFrameWindowActionListener()
-	{
-		frame.addWindowListener(new WindowAdapter()
-		{
-			@Override
-			public void windowClosing(WindowEvent event)
-			{
-				exitCloseOperation();
-			}
+    private static void configureFrameWindowActionListener()
+    {
+        frame.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent event)
+            {
+                exitCloseOperation();
+            }
 
-			@Override
-			public void windowClosed(WindowEvent event)
-			{
-				System.exit(0x0);
-			}
-		});
-	}
+            @Override
+            public void windowClosed(WindowEvent event)
+            {
+                System.exit(0x0);
+            }
+        });
+    }
 
-	/**
-	 * Method used to present an option when terminating the application
-	 * which can either be closing and saving changes or closing and discarding
-	 * changes
-	 */
-	private static void exitCloseOperation()
-	{
-		Object[] options = { "Save", "Quit" };
-		
-		int choice = JOptionPane.showOptionDialog(frame, "Save changes?",
-				               "Quit Dialog", JOptionPane.DEFAULT_OPTION,
-				   JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+    private static void configureLookAndFeel()
+    {
+        SwingUtilities.invokeLater(()->{
+            try
+            {
+                for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
+                {
+                    if ("Nimbus".equals(info.getName()))
+                    {
+                        UIManager.setLookAndFeel(info.getClassName());
+                        break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {}
+        });
+    }
 
-		if (choice == 0)
-		{
-			Database.save();
-			System.exit(0x0);
-		}
-		else
-		{
-			System.exit(0x0);
-		}
-	}
+    /**
+     * Method used to present an option when terminating the application
+     * which can either be closing and saving changes or closing and discarding
+     * changes
+     */
+    private static void exitCloseOperation()
+    {
+        Object[] options = { "Save", "Quit" };
+        
+        int choice = JOptionPane.showOptionDialog(frame, "Save changes?",
+                               "Quit Dialog", JOptionPane.DEFAULT_OPTION,
+                   JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 
-	/**
-	 * Method used to respond to the application's launcher when requested to
-	 * load the interface
-	 */
-	public static void loadView()
-	{
-		new View();
-	}
+        if (choice == 0)
+        {
+            Database.save();
+            System.exit(0x0);
+        }
+        else
+            System.exit(0x0);
+    }
 
-	/**
-	 * Method used for communication between the view and dialog box
-	 */
-	static JFrame getFrame()
-	{
-		return frame;
-	}
+    /**
+     * Method used to respond to the application's launcher when requested to
+     * load the interface
+     */
+    public static void loadView()
+    {
+        new View();
+    }
 
-	/**
-	 * Method used for communication between the view's view-port and dialog box
-	 */
-	static JTextArea getDisplay()
-	{
-		return display;
-	}
+    /**
+     * Method used for communication between the view and dialog box
+     */
+    static JFrame getFrame()
+    {
+        return frame;
+    }
+
+    /**
+     * Method used for communication between the view's view-port and dialog box
+     */
+    static JTextArea getDisplay()
+    {
+        return display;
+    }
 
 }
