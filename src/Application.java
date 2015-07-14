@@ -18,9 +18,6 @@
  * @author Rico Antonio Felix <ricoantoniofelix@yahoo.com>
  */
 
-/*
- * Local Dependency
- */
 package com.rico.felix.app;
 
 /*
