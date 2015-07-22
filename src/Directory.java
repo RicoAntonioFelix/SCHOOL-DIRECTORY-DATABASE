@@ -112,10 +112,10 @@ public class Directory
         {
             return filingSystem.values()
                                .stream()
-                               .filter(person -> filter.test(person))
+                               .filter(filter)
                                .collect(Collectors.toList());
         }
-        
+
         return null;
     }
 
