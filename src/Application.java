@@ -21,9 +21,13 @@
 package com.rico.felix.app;
 
 /*
- * Local Dependencies
+ * Local Dependency
  */
 import com.rico.felix.data.Directory;
+
+/*
+ * Local Dependency
+ */
 import com.rico.felix.view.View;
 
 /**
