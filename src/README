@@ -1,4 +1,4 @@
 Usage Instructions:
 
-At the terminal window run the following commands:
+At the terminal window run the following command:
     chmod +x run.sh && ./run.sh
