@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Rico Antonio Felix
+ * Copyright (C) 2014-2015 Rico Antonio Felix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
+/**
+ * @author Rico Antonio Felix <ricoantoniofelix@yahoo.com>
+ */
+
 package com.rico.felix.models;
 
 /*
- * Dependency
+ * Platform Dependency
  */
 import java.io.Serializable;
 
@@ -29,109 +33,116 @@ import java.io.Serializable;
  */
 public abstract class Person implements Serializable
 {
-	/**
-	 * Object used for the serialization mechanism
-	 */
-	private static final long serialVersionUID = 4875771514949460706L;
+    // Field used for the serialization mechanism
+    private static final long serialVersionUID = 4875771514949460706L;
 
-	// Fields for storing fundamental information for an object of this type
-	private String firstName;
-	private String lastName;
-	private String email;
+    // Fields for storing fundamental information for an object of this type
+    private String firstName;
+    private String lastName;
+    private String email;
 
-	/**
-	 * Parameterized constructor for an object of this type
-	 *
-	 * @param firstName Person's first name
-	 * @param lastName  Person's last name
-	 * @param email     Person's email address
-	 */
-	public Person(final String firstName, final String lastName, final String email)
-	{
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-	}
+    /**
+     * Parameterized constructor for an object of this type
+     *
+     * @param firstName - Person's first name
+     * @param lastName  - Person's last name
+     * @param email     - Person's email address
+     */
+    public Person(final String firstName, final String lastName, final String email)
+    {
+        this.firstName = firstName;
+        this.lastName  = lastName;
+        this.email     = email;
+    }
 
-	/**
-	 * Retrieve first name associated with an object of this type
-	 *
-	 * @return First name associated with the object
-	 */
-	public String getFirstName()
-	{
-		return firstName;
-	}
+    /**
+     * Retrieve first name associated with an object of this type
+     *
+     * @return String - First name associated with the object
+     */
+    public String getFirstName()
+    {
+        return firstName;
+    }
 
-	/**
-	 * Change the first name associated with an object of this type
-	 *
-	 * @param firstName New first name to associate with the object
-	 */
-	public void setFirstName(final String firstName)
-	{
-		this.firstName = firstName;
-	}
+    /**
+     * Change the first name associated with an object of this type
+     *
+     * @param firstName - New first name to associate with the object
+     *
+     * @return void
+     */
+    public void setFirstName(final String firstName)
+    {
+        this.firstName = firstName;
+    }
 
-	/**
-	 * Retrieve last name associated with an object of this type
-	 *
-	 * @return Last name associated with the object
-	 */
-	public String getLastName()
-	{
-		return lastName;
-	}
+    /**
+     * Retrieve last name associated with an object of this type
+     *
+     * @return String - Last name associated with the object
+     */
+    public String getLastName()
+    {
+        return lastName;
+    }
 
-	/**
-	 * Change the last name associated with an object of this type
-	 *
-	 * @param lastName New last name to associate with the object
-	 */
-	public void setLastName(final String lastName)
-	{
-		this.lastName = lastName;
-	}
+    /**
+     * Change the last name associated with an object of this type
+     *
+     * @param lastName - New last name to associate with the object
+     *
+     * @return void
+     */
+    public void setLastName(final String lastName)
+    {
+        this.lastName = lastName;
+    }
 
-	/**
-	 * Retrieve email address associated with an object of this type
-	 *
-	 * @return Email address associated with the object
-	 */
-	public String getEmail()
-	{
-		return email;
-	}
+    /**
+     * Retrieve email address associated with an object of this type
+     *
+     * @return String - Email address associated with the object
+     */
+    public String getEmail()
+    {
+        return email;
+    }
 
-	/**
-	 * Change the email address associated with an object of this type
-	 *
-	 * @param email New email address to associate with the object
-	 */
-	public void setEmail(final String email)
-	{
-		this.email = email;
-	}
+    /**
+     * Change the email address associated with an object of this type
+     *
+     * @param email - New email address to associate with the object
+     *
+     * @return void
+     */
+    public void setEmail(final String email)
+    {
+        this.email = email;
+    }
 
-	/**
-	 * Retrieve a custom built key from this object which is designed
-	 * to be usable within mapped data structures.
-	 */
-	public String getKey()
-	{
-		return lastName + " " + firstName;
-	}
+    /**
+     * Retrieve a custom built key from this object which is designed
+     * to be usable within mapped data structures.
+     *
+     * @return String - Key to be usable with mapped data structures
+     */
+    public String getKey()
+    {
+        return (lastName + " " + firstName);
+    }
 
-	/**
-	 * Retrieve the string representation of an object of this type
-	 *
-	 * @return String representation for this object
-	 */
-	@Override
-	public String toString()
-	{
-		return String.format("Name: %s%nE-mail Address: %s%n",
-				             (firstName + " " + lastName), email);
-	}
+    /**
+     * Retrieve the string representation of an object of this type
+     *
+     * @return String - String representation for this object
+     */
+    @Override
+    public String toString()
+    {
+        return String.format("Name: %s%nE-mail Address: %s%n",
+            (firstName + " " + lastName), email
+        );
+    }
 
 }
