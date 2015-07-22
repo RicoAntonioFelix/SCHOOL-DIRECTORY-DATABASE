@@ -1,5 +1,4 @@
 Usage Instructions:
 
 At the terminal window run the following commands:
-    make
     chmod +x run.sh && ./run.sh
