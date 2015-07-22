@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Rico Antonio Felix
+ * Copyright (C) 2014-2015 Rico Antonio Felix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+/**
+ * @author Rico Antonio Felix <ricoantoniofelix@yahoo.com>
+ */
+
 package com.rico.felix.models;
 
 /**
@@ -26,38 +30,38 @@ package com.rico.felix.models;
  */
 public final class Student extends Person
 {
-	/**
-	 * Object used for the serialization mechanism
-	 */
-	private static final long serialVersionUID = -8342165606041819467L;
+    // Field used for the serialization mechanism
+    private static final long serialVersionUID = -8342165606041819467L;
 
-	// Field for storing student's seniority
-	private String classTypeStatus;
+    // Field for storing student's seniority
+    private String classTypeStatus;
 
-	/**
-	 * Parameterized constructor for an object of this type
-	 *
-	 * @param firstName       Student's first name
-	 * @param lastName        Student's last name
-	 * @param email           Student's email address
-	 * @param classTypeStatus Student's seniority status
-	 */
-	public Student(final String firstName, final String lastName, final String email,
-			final String classTypeStatus)
-	{
-		super(firstName, lastName, email);
-		this.classTypeStatus = classTypeStatus;
-	}
+    /**
+     * Parameterized constructor for an object of this type
+     *
+     * @param firstName       - Student's first name
+     * @param lastName        - Student's last name
+     * @param email           - Student's email address
+     * @param classTypeStatus - Student's seniority status
+     */
+    public Student(final String firstName, final String lastName, final String email,
+            final String classTypeStatus)
+    {
+        super(firstName, lastName, email);
+        this.classTypeStatus = classTypeStatus;
+    }
 
-	/**
-	 * Retrieve the string representation of an object of this type
-	 *
-	 * @return String representation for this object
-	 */
-	@Override
-	public String toString()
-	{
-		return String.format("Student " + super.toString() + "Class Type: %s%n%n",
-			                 classTypeStatus);
-	}
+    /**
+     * Retrieve the string representation of an object of this type
+     *
+     * @return String - String representation for this object
+     */
+    @Override
+    public String toString()
+    {
+        return String.format(
+            "Student " + super.toString() + "Class Type: %s%n%n",
+            classTypeStatus
+        );
+    }
 }
