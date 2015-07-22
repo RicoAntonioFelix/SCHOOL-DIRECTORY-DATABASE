@@ -16,4 +16,10 @@
 
 #!/bin/sh
 
+# Build
+#=======
+javac -d . *.java
+
+# Run
+#=====
 java com.rico.felix.app.Application
