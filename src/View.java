@@ -1,8 +1,8 @@
 /*
- * Copyright 2014 Rico Antonio Felix
+ * Copyright (C) 2014-2015 Rico Antonio Felix
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
- * You may not use this file except in compliance with the License.
+ * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -12,6 +12,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ */
+
+/**
+ * @author Rico Antonio Felix <ricoantoniofelix@yahoo.com>
  */
 
 package com.rico.felix.view;
@@ -25,7 +29,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Iterator;
 
 /*
  * Platform Dependencies
@@ -57,9 +60,8 @@ import com.rico.felix.data.Database;
 import com.rico.felix.data.Directory;
 
 /*
- * Local Dependencies
+ * Local Dependency
  */
-import com.rico.felix.auxiliary.Predicate;
 import com.rico.felix.auxiliary.MemberTypes;
 
 /**
@@ -243,7 +245,7 @@ public final class View
 
     private static void configureSaveMenuActionListener()
     {
-        save.addActionListener((event) -> {
+        save.addActionListener(event -> {
             Database.save();
             display.setEditable(true);
             display.replaceRange("Changes was saved successfully", 0,
@@ -254,9 +256,7 @@ public final class View
 
     private static void configureExitMenuActionListener()
     {
-        exit.addActionListener((event) -> {
-            exitCloseOperation();
-        });
+        exit.addActionListener(event -> exitCloseOperation());
     }
 
     private static void configureEditMenuActionListeners()
@@ -270,35 +270,35 @@ public final class View
 
     private static void configureAddStudentActionListener()
     {
-        addStudent.addActionListener((event) -> {
+        addStudent.addActionListener(event -> {
             Dialogs.getAddMemberDialog(MemberTypes.STUDENT).setVisible(true);
         });
     }
 
     private static void configureAddStaffMemberActionListener()
     {
-        addStaffMember.addActionListener((event) -> {
+        addStaffMember.addActionListener(event -> {
             Dialogs.getAddMemberDialog(MemberTypes.STAFF).setVisible(true);
         });
     }
 
     private static void configureAddFacultyMemberActionListener()
     {
-        addFacultyMember.addActionListener((event) -> {
+        addFacultyMember.addActionListener(event -> {
             Dialogs.getAddMemberDialog(MemberTypes.FACULTY).setVisible(true);
         });
     }
 
     private static void configureRemoveMemberActionListener()
     {
-        removeMember.addActionListener((event) -> {
+        removeMember.addActionListener(event -> {
             Dialogs.getRemoveMemberDialog().setVisible(true);
         });
     }
 
     private static void configureClearDisplayActionListener()
     {
-        clearDisplay.addActionListener((event) -> {
+        clearDisplay.addActionListener(event -> {
             display.setEditable(true);
             display.replaceRange("", 0, display.getText().length());
             display.setEditable(false);
@@ -316,12 +316,13 @@ public final class View
 
     private static void configureShowAllActionListener()
     {
-        showAll.addActionListener((event) -> {
+        showAll.addActionListener(event -> {
 
             StringBuilder information = new StringBuilder("");
 
             Directory.getMemberInformation(person -> person instanceof Person)
-                     .forEachRemaining((Person person) -> {information.append(person);});
+                     .stream()
+                     .forEach(information::append);
 
             if (information.length() != 0)
             {
@@ -337,7 +338,7 @@ public final class View
 
     private static void configureFindMemberActionListener()
     {
-        findMember.addActionListener((event) -> {
+        findMember.addActionListener(event -> {
             Dialogs.getFindMemberDialog().setVisible(true);
         });
     }
@@ -349,7 +350,8 @@ public final class View
             StringBuilder information = new StringBuilder("");
 
             Directory.getMemberInformation(person -> person instanceof Student)
-                     .forEachRemaining((Person student) -> {information.append(student);});
+                     .stream()
+                     .forEach(information::append);
 
             if (information.length() != 0)
             {
@@ -366,12 +368,13 @@ public final class View
 
     private static void configureFindStaffMemberActionListener()
     {
-        findStaffMembers.addActionListener((event) -> {
+        findStaffMembers.addActionListener(event -> {
 
             StringBuilder information = new StringBuilder("");
 
             Directory.getMemberInformation(person -> person instanceof Staff)
-                     .forEachRemaining((Person staff) -> {information.append(staff);});
+                     .stream()
+                     .forEach(information::append);
 
             if (information.length() != 0)
             {
@@ -388,12 +391,13 @@ public final class View
 
     private static void configureFindFacultyMemberActionListener()
     {
-        findFacultyMembers.addActionListener((event) -> {
+        findFacultyMembers.addActionListener(event -> {
 
             StringBuilder information = new StringBuilder("");
 
             Directory.getMemberInformation(person -> person instanceof Faculty)
-                     .forEachRemaining((Person faculty) -> {information.append(faculty);});
+                     .stream()
+                     .forEach(information::append);
 
             if (information.length() != 0)
             {
@@ -416,7 +420,7 @@ public final class View
 
     private static void configureManualActionListener()
     {
-        manual.addActionListener((event) -> {
+        manual.addActionListener(event -> {
             JOptionPane.showMessageDialog(frame, "To be written at a later date", "Manual",
                                           JOptionPane.PLAIN_MESSAGE, null);
         });
@@ -424,7 +428,7 @@ public final class View
 
     private static void configureAboutActionListener()
     {
-        about.addActionListener((event) -> {
+        about.addActionListener(event -> {
             JOptionPane.showMessageDialog(frame, "<html><p>School Directory Database v1.0a"
                                    + "</p><br/><p>Created by Rico Antonio Felix</p></html>",
                                      "About", JOptionPane.PLAIN_MESSAGE, null);
@@ -474,7 +478,7 @@ public final class View
 
     private static void configureLookAndFeel()
     {
-        SwingUtilities.invokeLater(()->{
+        SwingUtilities.invokeLater(() -> {
             try
             {
                 for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
@@ -495,6 +499,8 @@ public final class View
      * Method used to present an option when terminating the application
      * which can either be closing and saving changes or closing and discarding
      * changes
+     *
+     * @return void
      */
     private static void exitCloseOperation()
     {
@@ -516,6 +522,8 @@ public final class View
     /**
      * Method used to respond to the application's launcher when requested to
      * load the interface
+     *
+     * @return void
      */
     public static void loadView()
     {
