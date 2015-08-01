@@ -31,6 +31,11 @@ import java.util.TreeMap;
 /*
  * Platform Dependency
  */
+import java.util.stream.Stream;
+
+/*
+ * Platform Dependency
+ */
 import java.util.function.Predicate;
 
 /*
@@ -103,17 +108,16 @@ public class Directory
      *
      * @param filter - Object used to filter the records for a specific member type
      *
-     * @return List<Person> - A specified sequence of records from the database if located
-     *                        or null
+     * @return Stream<Person> - A specified sequence of records from the database if located
+     *                          or null
      */
-    public static List<Person> getMemberInformation(Predicate<Person> filter)
+    public static Stream<Person> getMemberInformation(Predicate<Person> filter)
     {
         if (!filingSystem.isEmpty())
         {
             return filingSystem.values()
                                .stream()
-                               .filter(filter)
-                               .collect(Collectors.toList());
+                               .filter(filter);
         }
 
         return null;
