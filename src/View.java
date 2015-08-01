@@ -25,6 +25,10 @@ package com.rico.felix.view;
  */
 import java.awt.BorderLayout;
 import java.awt.Color;
+
+/*
+ * Platform Dependencies
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -321,7 +325,6 @@ public final class View
             StringBuilder information = new StringBuilder("");
 
             Directory.getMemberInformation(person -> person instanceof Person)
-                     .stream()
                      .forEach(information::append);
 
             if (information.length() != 0)
@@ -350,7 +353,6 @@ public final class View
             StringBuilder information = new StringBuilder("");
 
             Directory.getMemberInformation(person -> person instanceof Student)
-                     .stream()
                      .forEach(information::append);
 
             if (information.length() != 0)
@@ -373,7 +375,6 @@ public final class View
             StringBuilder information = new StringBuilder("");
 
             Directory.getMemberInformation(person -> person instanceof Staff)
-                     .stream()
                      .forEach(information::append);
 
             if (information.length() != 0)
@@ -396,7 +397,6 @@ public final class View
             StringBuilder information = new StringBuilder("");
 
             Directory.getMemberInformation(person -> person instanceof Faculty)
-                     .stream()
                      .forEach(information::append);
 
             if (information.length() != 0)
