@@ -35,6 +35,11 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /*
+ * Platform Dependency
+ */
+import java.util.function.Predicate;
+
+/*
  * Platform Dependencies
  */
 import javax.swing.JFrame;
@@ -320,23 +325,9 @@ public final class View
 
     private static void configureShowAllActionListener()
     {
-        showAll.addActionListener(event -> {
-
-            StringBuilder information = new StringBuilder("");
-
-            Directory.getMemberInformation(person -> person instanceof Person)
-                     .forEach(information::append);
-
-            if (information.length() != 0)
-            {
-                display.setEditable(true);
-                display.replaceRange("Directory Listing:\n\n" + information.toString(), 0,
-                                     display.getText().length());
-                display.setEditable(false);
-            }
-            else
-                emptyDirectoryNotification();
-        });
+        showAll.addActionListener(
+            action(person -> person instanceof Person)
+        );
     }
 
     private static void configureFindMemberActionListener()
@@ -348,55 +339,32 @@ public final class View
 
     private static void configureFindStudentActionListener()
     {
-        findStudents.addActionListener((event) -> {
-
-            StringBuilder information = new StringBuilder("");
-
-            Directory.getMemberInformation(person -> person instanceof Student)
-                     .forEach(information::append);
-
-            if (information.length() != 0)
-            {
-                display.setEditable(true);
-                display.replaceRange("Directory Listing:\n\n" + information.toString(), 0,
-                                     display.getText().length());
-                display.setEditable(false);
-            }
-            else
-                emptyDirectoryNotification();
-
-        });
+        findStudents.addActionListener(
+            action(person -> person instanceof Student)
+        );
     }
 
     private static void configureFindStaffMemberActionListener()
     {
-        findStaffMembers.addActionListener(event -> {
-
-            StringBuilder information = new StringBuilder("");
-
-            Directory.getMemberInformation(person -> person instanceof Staff)
-                     .forEach(information::append);
-
-            if (information.length() != 0)
-            {
-                display.setEditable(true);
-                display.replaceRange("Directory Listing:\n\n" + information.toString(), 0,
-                                     display.getText().length());
-                display.setEditable(false);
-            }
-            else
-                emptyDirectoryNotification();
-
-        });
+        findStaffMembers.addActionListener(
+            action(person -> person instanceof Staff)
+        );
     }
 
     private static void configureFindFacultyMemberActionListener()
     {
-        findFacultyMembers.addActionListener(event -> {
+        findFacultyMembers.addActionListener(
+            action(person -> person instanceof Faculty)
+        );
+    }
+
+    private static ActionListener action(Predicate<Person> criteria)
+    {
+        return event -> {
 
             StringBuilder information = new StringBuilder("");
 
-            Directory.getMemberInformation(person -> person instanceof Faculty)
+            Directory.getMemberInformation(criteria)
                      .forEach(information::append);
 
             if (information.length() != 0)
@@ -409,7 +377,7 @@ public final class View
             else
                 emptyDirectoryNotification();
 
-        });
+        };
     }
 
     private static void configureHelpMenuActionListeners()
